@@ -12,7 +12,10 @@ class TasController extends Controller
      */
     public function index()
     {
-        return view('produk-tas.index', ['title' => 'tas']);
+        return view('produk-tas.index', [
+            'title' => 'DAFTAR JUALAN TAS',
+            'tas'=> tas::all(),
+            ]);
     }
 
     /**
