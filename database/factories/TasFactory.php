@@ -20,9 +20,9 @@ class TasFactory extends Factory
         return [
             'nama' => fake()->name(),
             'merk' => fake()->name(),
-            'harga' => fake()->numberBetween(),
-            'stok' => fake()->numberBetween(),
+            'harga' => fake()->numerify(),
             'warna' => fake()->name(),
+            'jumlah' => fake()->numerify(),
             
         ];
     }

@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\TasController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TasController;
+
+Route::resource('produk-tas', TasController::class);
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
- Route::get('/produk-tas', [TasController::class, 'index']);
- Route::get('/produk-tas/create', [TasController::class, 'create']);
 
+
+    Route::get('/', [TasController::class, 'index'])->name('index');
+    Route::get('/create', [TasController::class, 'create'])->name('create');
+    Route::post('/store', [TasController::class, 'store'])->name('store');
 

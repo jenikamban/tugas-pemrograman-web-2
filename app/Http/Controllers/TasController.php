@@ -2,66 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tas;
+use App\Models\Tas;
 use Illuminate\Http\Request;
 
 class TasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('produk-tas.index', [
             'title' => 'DAFTAR JUALAN TAS',
-            'tas'=> tas::all(),
-            ]);
+            'tas' => Tas::all(),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-         return view('produk-tas.create', ['title' => ' create tas']);
+        return view('produk-tas.create', [
+            'title' => 'Create Produk Tas',
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|max:255',
+            'merk' => 'required|max:255',
+            'harga' => 'required|numeric|min:5000000',
+            'warna' => 'required|max:255',
+            'jumlah' => 'required|integer|min:1|max:3',
+        ], [
+            'nama.required' => 'Nama wajib diisi',
+            'merk.required' => 'Merk wajib diisi',
+            'harga.required' => 'Harga wajib diisi',
+            'harga.numeric' => 'Harga harus berupa angka',
+            'harga.min' => 'Harga minimal Rp 5.000.000',
+            'warna.required' => 'Warna wajib diisi',
+            'jumlah.required' => 'jumlah wajib diisi',
+            'jumlah.integer' => 'jumlah harus bilangan bulat',
+            'jumlah.min' => 'jumlah minimal 1',
+            'jumlah.max' => 'jumlah max 3',
+        ]);
+
+        Tas::create($validated);
+
+        return redirect()->route('produk-tas.index')
+            ->with('success', 'Data berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(tas $tas)
+    public function show(Tas $tas)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(tas $tas)
+    public function edit(Tas $tas)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, tas $tas)
+    public function update(Request $request, Tas $tas)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(tas $tas)
+    public function destroy(Tas $tas)
     {
         //
     }
