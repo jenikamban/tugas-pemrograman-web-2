@@ -23,9 +23,18 @@
                 {{ $item->warna }} --
                 {{ $item->jumlah }}
 
-                <a href="{{ route('produk-tas.edit', $item) }}" class="btn btn-warning">
+                <a href="{{ route('produk-tas.edit', $item) }}" class="btn btn-warning btn-sm">
                     Edit
                 </a>
+
+                <form action="{{ route('produk-tas.destroy', $item) }}" method="POST" class="d-inline">
+                    @method('DELETE')
+                    @csrf
+
+
+                    <button type="submit"
+                        class="btn btn-danger btn-sm"onclick="return confirm('ANDA YAKIN')">Delete</button>
+                </form>
 
             </li>
         @endforeach

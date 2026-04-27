@@ -45,7 +45,7 @@ class TasController extends Controller
 
         Tas::create($validated);
 
-        return redirect()->route('produk-tas.index')
+        return redirect()->route('tas.index')
             ->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -85,12 +85,15 @@ class TasController extends Controller
 
        $tas->update($validated);
 
-        return redirect()->route('produk-tas.index')
+        return redirect()->route('tas.index')
             ->with('success', 'Data berhasil diubah');
     }
 
     public function destroy(Tas $tas)
     {
-        //
+        $tas->delete($tas);
+
+        return redirect()->route('tas.index')
+            ->with('success', 'Data berhasil dihapus');
     }
 }

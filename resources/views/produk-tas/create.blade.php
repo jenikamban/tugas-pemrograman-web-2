@@ -39,7 +39,7 @@
                         @enderror
                     </div>
 
-                    <a href="{{ route('produk-tas.index') }}" class="btn btn-warning">Cancel</a>
+                    <a href="{{ route('tas.index') }}" class="btn btn-warning">Cancel</a>
                     <button type="submit" class="btn btn-primary">Submit</button>
 
     </form>
