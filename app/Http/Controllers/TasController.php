@@ -56,12 +56,37 @@ class TasController extends Controller
 
     public function edit(Tas $tas)
     {
-        //
+         return view('produk-tas.edit', [
+            'title' => ' edit produk',
+            'tas' => $tas,
+        ]);
     }
 
     public function update(Request $request, Tas $tas)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|max:255',
+            'merk' => 'required|max:255',
+            'harga' => 'required|numeric|min:5000000',
+            'warna' => 'required|max:255',
+            'jumlah' => 'required|integer|min:1|max:3',
+        ], [
+            'nama.required' => 'Nama wajib diisi',
+            'merk.required' => 'Merk wajib diisi',
+            'harga.required' => 'Harga wajib diisi',
+            'harga.numeric' => 'Harga harus berupa angka',
+            'harga.min' => 'Harga minimal Rp 5.000.000',
+            'warna.required' => 'Warna wajib diisi',
+            'jumlah.required' => 'jumlah wajib diisi',
+            'jumlah.integer' => 'jumlah harus bilangan bulat',
+            'jumlah.min' => 'jumlah minimal 1',
+            'jumlah.max' => 'jumlah max 3',
+        ]);
+
+       $tas->update($validated);
+
+        return redirect()->route('produk-tas.index')
+            ->with('success', 'Data berhasil diubah');
     }
 
     public function destroy(Tas $tas)
