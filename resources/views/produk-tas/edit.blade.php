@@ -2,7 +2,8 @@
 
     <x-slot:title>{{ $title }}</x-slot>
 
-    <form method="POST" action="{{ route('produk-tas.update', $tas) }}">
+    <form action="{{ route('brand-tas.update', $brand) }}" method="POST">
+
         @csrf
         @method('PUT')
 

@@ -7,13 +7,33 @@ use Illuminate\Http\Request;
 
 class TasController extends Controller
 {
-    public function index()
+    
+
+     public function index(Request $request)
     {
-        return view('produk-tas.index', [
-            'title' => 'DAFTAR JUALAN TAS',
-            'tas' => Tas::all(),
-        ]);
+        
+       $search = $request->input('search');
+
+    // Query dengan kondisi pencarian + pagination
+    $tas = Tas::query()
+        ->when($search, function ($query, $search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                  ->orWhere('warna', 'like', "%{$search}%")
+                  ->orWhere('merk', 'like', "%{$search}%");
+            });
+        })
+        ->paginate(5)
+        ->withQueryString(); // supaya pagination tetap bawa parameter search
+
+    // Return ke view dengan data
+    return view('produk-tas.index', [
+        'title'  => 'Data Produk Tas',
+        'tas'    => $tas,
+        'search' => $search,
+    ]);
     }
+
 
     public function create()
     {
@@ -95,5 +115,9 @@ class TasController extends Controller
 
         return redirect()->route('tas.index')
             ->with('success', 'Data berhasil dihapus');
+          }
+          
     }
-}
+        
+
+

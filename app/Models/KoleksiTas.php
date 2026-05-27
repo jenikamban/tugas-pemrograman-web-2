@@ -2,24 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
 #[Fillable([
-    'brand_tas_id',
     'nama_koleksi',
+    'deskripsi',
     'tahun_rilis',
-    'tema',
-    'status_aktif',
+    'jumlah_item',
+    'brand_tas_id',
 ])]
 class KoleksiTas extends Model
 {
-    /** @use HasFactory<\Database\Factories\KoleksiTasFactory> */
     use HasFactory;
 
-    public function brandTas()
+    public function brand()
     {
-        return $this->belongsTo(BrandTas::class);
+        return $this->belongsTo(BrandTas::class, 'brand_tas_id');
     }
 }

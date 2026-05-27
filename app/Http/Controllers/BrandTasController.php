@@ -7,61 +7,47 @@ use App\Models\BrandTas;
 
 class BrandTasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
-     {
+    {
         $search = $request->input('search');
-    $brands = BrandTas::query()
-        ->when($search, function ($query, $search) {
-            $query->where('nama_brand', 'like', "%{$search}%")
-                  ->orWhere('negara_asal', 'like', "%{$search}%");
-        })
-        ->paginate(10);
+        $brands = BrandTas::query()
+            ->when($search, function ($query, $search) {
+                $query->where('nama_brand', 'like', "%{$search}%")
+                      ->orWhere('negara_asal', 'like', "%{$search}%");
+            })->paginate(5);
 
-    return view('brand_tas.index', compact('brands','search'));
+        return view('brand_tas.index', compact('brands','search'));
+    }
 
-        
-     }
+    public function create()
+    {
+        return view('brand_tas.create');
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_brand'   => 'required|string|max:255',
+            'negara_asal'  => 'required|string|max:255',
+            'tahun_berdiri'=> 'required|integer',
+        ]);
+
+        BrandTas::create($request->all());
+
+        return redirect()->route('brand-tas.index')->with('success', 'Brand berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(BrandTas $brandTas)
+    public function edit(BrandTas $brand)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(BrandTas $brandTas)
+    public function update(Request $request, BrandTas $brand)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, BrandTas $brandTas)
+    public function destroy(BrandTas $brand)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(BrandTas $brandTas)
-    {
-        //
+        
     }
 }

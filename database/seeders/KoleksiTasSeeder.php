@@ -12,6 +12,6 @@ class KoleksiTasSeeder extends Seeder
      */
     public function run(): void
     {
-        KoleksiTas::factory(10)->create();
+       // KoleksiTas::factory(10)->create();
     }
 }
