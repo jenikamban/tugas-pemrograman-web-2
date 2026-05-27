@@ -1,5 +1,5 @@
 <x-app>
-    <x-slot:title>Daftar Brand Tas</x-slot>
+    <x-slot:title>Detail BrandTas</x-slot>
 
     @session('success')
         <div class="alert alert-success">
@@ -41,6 +41,7 @@
                     {{ $brand->negara_asal }} ({{ $brand->tahun_berdiri }})
                 </span>
                 <span>
+                    <a href="{{ route('brand-tas.show', $brand) }}" class="btn btn-info btn-sm">Detail</a>
                     <a href="{{ route('brand-tas.edit', $brand) }}" class="btn btn-warning btn-sm">Edit</a>
 
                     <form action="{{ route('brand-tas.destroy', $brand) }}" method="POST" class="d-inline"

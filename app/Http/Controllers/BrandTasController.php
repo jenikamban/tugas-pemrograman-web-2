@@ -10,13 +10,14 @@ class BrandTasController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $brands = BrandTas::query()
-            ->when($search, function ($query, $search) {
-                $query->where('nama_brand', 'like', "%{$search}%")
-                      ->orWhere('negara_asal', 'like', "%{$search}%");
-            })->paginate(5);
+    $brands = BrandTas::query()
+        ->when($search, function ($query, $search) {
+            $query->where('nama_brand', 'like', "%{$search}%")
+                  ->orWhere('negara_asal', 'like', "%{$search}%");
+        })
+        ->paginate(5);
 
-        return view('brand_tas.index', compact('brands','search'));
+    return view('brand_tas.index', compact('brands', 'search'));
     }
 
     public function create()
@@ -60,4 +61,12 @@ class BrandTasController extends Controller
 
     return redirect()->route('brand-tas.index')->with('success', 'Brand berhasil dihapus');
     }
+   public function show(BrandTas $brand)
+{
+    return view('brand_tas.show', [
+        'brand' => $brand,
+        'title' => 'Detail BrandTas'
+    ]);
+}
+
 }
