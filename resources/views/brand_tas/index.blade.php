@@ -35,9 +35,14 @@
 
     <ul class="list-group">
         @foreach ($brands as $brand)
-            <li class="list-group-item">
-                {{ $brands->firstItem() + $loop->index }}. {{ $brand->nama_brand }} --
-                {{ $brand->negara_asal }} ({{ $brand->tahun_berdiri }})
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    {{ $brands->firstItem() + $loop->index }}. {{ $brand->nama_brand }} --
+                    {{ $brand->negara_asal }} ({{ $brand->tahun_berdiri }})
+                </span>
+                <span>
+                    <a href="{{ route('brand-tas.edit', $brand->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                </span>
             </li>
         @endforeach
     </ul>

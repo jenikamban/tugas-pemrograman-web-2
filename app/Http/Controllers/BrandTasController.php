@@ -37,15 +37,23 @@ class BrandTasController extends Controller
         return redirect()->route('brand-tas.index')->with('success', 'Brand berhasil ditambahkan');
     }
 
-    public function edit(BrandTas $brand)
-    {
-    }
+    public function edit(BrandTas $brand_ta)
+{
+    return view('brand_tas.edit', ['brand' => $brand_ta]);
+}
 
-    public function update(Request $request, BrandTas $brand)
-    {
-        
-    }
+    public function update(Request $request, BrandTas $brand_ta)
+{
+    $request->validate([
+        'nama_brand'    => 'required|string|max:255',
+        'negara_asal'   => 'required|string|max:255',
+        'tahun_berdiri' => 'required|integer',
+    ]);
 
+    $brand_ta->update($request->all());
+
+    return redirect()->route('brand-tas.index')->with('success', 'Brand berhasil diubah');
+}
     public function destroy(BrandTas $brand)
     {
         
