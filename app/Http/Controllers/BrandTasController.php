@@ -54,8 +54,10 @@ class BrandTasController extends Controller
 
     return redirect()->route('brand-tas.index')->with('success', 'Brand berhasil diubah');
 }
-    public function destroy(BrandTas $brand)
+    public function destroy(BrandTas $ta)
     {
-        
+        $ta->delete();
+
+    return redirect()->route('brand-tas.index')->with('success', 'Brand berhasil dihapus');
     }
 }

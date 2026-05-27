@@ -7,7 +7,7 @@
         </div>
     @endsession
 
-    <a class="btn btn-primary" href="{{ route('brand-tas.create') }}" role="button">Tambah Brand</a>
+    <a class="btn btn-primary" href="{{ route('brand-tas.create') }}" role="button">create</a>
 
     <form action="{{ route('brand-tas.index') }}">
         <div class="row g-3 mb-3">
@@ -41,7 +41,14 @@
                     {{ $brand->negara_asal }} ({{ $brand->tahun_berdiri }})
                 </span>
                 <span>
-                    <a href="{{ route('brand-tas.edit', $brand->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ route('brand-tas.edit', $brand) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                    <form action="{{ route('brand-tas.destroy', $brand) }}" method="POST" class="d-inline"
+                        onsubmit="return confirm('Yakin ingin menghapus brand ini?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
                 </span>
             </li>
         @endforeach
