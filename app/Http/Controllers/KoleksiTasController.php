@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BrandTas;
 use App\Models\KoleksiTas;
-use App\Models\ProdukTas;
 use Illuminate\Http\Request;
-
 
 class KoleksiTasController extends Controller
 {
@@ -31,14 +29,27 @@ class KoleksiTasController extends Controller
         return view('koleksi_tas.index', compact('koleksis', 'brands'));
     }
 
+    public function create()
+    {
+        $brands = BrandTas::all();
+        return view('koleksi_tas.create', compact('brands'));
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        
+        $validated = $request->validate([
+            'nama_koleksi' => 'required|string|max:100',
+            'jenis_koleksi' => 'required|string|max:50',
+            'material' => 'required|string|max:50',
+            'warna' => 'required|string|max:50',
+            'brand_tas_id' => 'required|exists:brand_tas,id',
+        ]);
+
+        KoleksiTas::create($validated);
+
+        return redirect()->route('koleksi-tas.index')->with('success', 'Data koleksi berhasil ditambahkan!');
     }
+
 
     /**
      * Display the specified resource.

@@ -24,9 +24,9 @@
         </div>
 
         <div class="mb-3">
-            <label>Tahun Berdiri</label>
-            <input type="number" name="tahun_berdiri" class="form-control" placeholder="Masukkan tahun berdiri..."
-                value="{{ old('tahun_berdiri') }}">
+            <label>Tahun Didirikan</label>
+            <input type="number" name="tahun_didirikan" class="form-control" placeholder="Masukkan tahun didirikan..."
+                value="{{ old('tahun_didirikan') }}">
         </div>
 
         <a href="{{ route('brand-tas.index') }}" class="btn btn-warning">Cancel</a>
