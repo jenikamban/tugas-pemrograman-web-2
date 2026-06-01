@@ -38,15 +38,22 @@
                     {{ $koleksi->material }} - {{ $koleksi->warna }}
                     <strong>[Brand: {{ $koleksi->brand->nama_brand ?? 'Tidak ada brand' }}]</strong>
                 </span>
-                <span class="d-flex gap-2">
+
+                <!-- Bagian tombol sejajar -->
+                <span class="d-flex gap-2 align-items-center">
                     <a href="{{ route('koleksi-tas.edit', ['koleksi_ta' => $koleksi]) }}"
                         class="btn btn-warning btn-sm">Edit</a>
+
                     <form action="{{ route('koleksi-tas.destroy', ['koleksi_ta' => $koleksi]) }}" method="POST"
                         onsubmit="return confirm('ANDA YAKIN INGIN MENGHAPUS KOLEKSI INI???')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
+
+                    <a href="{{ route('koleksi-tas.show', ['koleksi_ta' => $koleksi]) }}"
+                        class="btn btn-info btn-sm">Detail</a>
+                </span>
             </li>
         @endforeach
     </ul>

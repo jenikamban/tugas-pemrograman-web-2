@@ -54,10 +54,14 @@ class KoleksiTasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(KoleksiTas $koleksiTas)
-    {
-        //
-    }
+    public function show(KoleksiTas $koleksi_ta)
+{
+    return view('koleksi_tas.show', [
+        'koleksi' => $koleksi_ta,
+        'title' => 'Detail Koleksi Tas'
+    ]);
+}
+
 
     /**
      * Show the form for editing the specified resource.
