@@ -93,8 +93,11 @@ public function update(Request $request, KoleksiTas $koleksi_ta)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KoleksiTas $koleksiTas)
-    {
-        //
-    }
+    public function destroy(KoleksiTas $koleksi_ta)
+{
+    $koleksi_ta->delete();
+
+    return redirect()->route('koleksi-tas.index')
+                     ->with('success', 'Data Koleksi berhasil dihapus!');
+}
 }

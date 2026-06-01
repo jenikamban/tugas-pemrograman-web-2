@@ -41,7 +41,12 @@
                 <span class="d-flex gap-2">
                     <a href="{{ route('koleksi-tas.edit', ['koleksi_ta' => $koleksi]) }}"
                         class="btn btn-warning btn-sm">Edit</a>
-
+                    <form action="{{ route('koleksi-tas.destroy', ['koleksi_ta' => $koleksi]) }}" method="POST"
+                        onsubmit="return confirm('ANDA YAKIN INGIN MENGHAPUS KOLEKSI INI???')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
             </li>
         @endforeach
     </ul>

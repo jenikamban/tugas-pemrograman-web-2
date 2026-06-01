@@ -46,4 +46,5 @@
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ route('koleksi-tas.index') }}" class="btn btn-warning">Cancel</a>
     </form>
+
 </x-app>
