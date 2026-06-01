@@ -7,11 +7,8 @@ use App\Models\KoleksiTas;
 
 class KoleksiTasSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-       // KoleksiTas::factory(10)->create();
+        \App\Models\KoleksiTas::factory()->count(50)->create();
     }
 }

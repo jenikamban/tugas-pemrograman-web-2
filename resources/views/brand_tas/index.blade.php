@@ -17,10 +17,11 @@
             </div>
 
             <div class="col-md-4">
-                <select class="form-select" id="tahun_berdiri" name="tahun_berdiri">
+                <select class="form-select" id="tahun_didirikan" name="tahun_didirikan">
                     <option value="">Semua Tahun</option>
-                    @foreach ($brands->pluck('tahun_berdiri')->unique() as $tahun)
-                        <option value="{{ $tahun }}" {{ request('tahun_berdiri') == $tahun ? 'selected' : '' }}>
+                    @foreach ($brands->pluck('tahun_didirikan')->unique() as $tahun)
+                        <option value="{{ $tahun }}"
+                            {{ request('tahun_didirikan') == $tahun ? 'selected' : '' }}>
                             {{ $tahun }}
                         </option>
                     @endforeach
@@ -38,7 +39,7 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span>
                     {{ $brands->firstItem() + $loop->index }}. {{ $brand->nama_brand }} --
-                    {{ $brand->negara_asal }} ({{ $brand->tahun_berdiri }})
+                    {{ $brand->negara_asal }} ({{ $brand->tahun_didirikan }})
                 </span>
                 <span>
                     <a href="{{ route('brand-tas.show', $brand) }}" class="btn btn-info btn-sm">Detail</a>

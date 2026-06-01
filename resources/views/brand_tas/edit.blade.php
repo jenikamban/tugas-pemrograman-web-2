@@ -18,9 +18,9 @@
         </div>
 
         <div class="mb-3">
-            <label for="tahun_berdiri" class="form-label">Tahun Berdiri</label>
-            <input type="number" class="form-control" id="tahun_berdiri" name="tahun_berdiri"
-                value="{{ old('tahun_berdiri', $brand->tahun_berdiri) }}" required>
+            <label for="tahun_didirikan" class="form-label">Tahun Didirikan</label>
+            <input type="number" class="form-control" id="tahun_didirikan" name="tahun_didirikan"
+                value="{{ old('tahun_didirikan', $brand->tahun_didirikan) }}" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>

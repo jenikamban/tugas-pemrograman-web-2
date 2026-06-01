@@ -1,26 +1,15 @@
 <x-app>
-
     <x-slot:title>{{ $title }}</x-slot>
 
     <form action="{{ route('brand-tas.update', $brand) }}" method="POST">
-
         @csrf
         @method('PUT')
 
         <div class="mb-3">
-            <label>NAMA</label>
-            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
-                value="{{ old('nama', $tas->nama) }}">
-            @error('nama')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label>MERK</label>
-            <input type="text" name="merk" class="form-control @error('merk') is-invalid @enderror"
-                value="{{ old('merk', $tas->merk) }}">
-            @error('merk')
+            <label>NAMA PRODUK</label>
+            <input type="text" name="nama_produk" class="form-control @error('nama_produk') is-invalid @enderror"
+                value="{{ old('nama_produk', $tas->nama_produk) }}">
+            @error('nama_produk')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
@@ -44,17 +33,15 @@
         </div>
 
         <div class="mb-3">
-            <label>JUMLAH</label>
-            <input type="number" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror"
-                value="{{ old('jumlah', $tas->jumlah) }}">
-            @error('jumlah')
+            <label>STOK</label>
+            <input type="number" name="stok" class="form-control @error('stok') is-invalid @enderror"
+                value="{{ old('stok', $tas->stok) }}">
+            @error('stok')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
 
-        <a href="{{ route('tas.index') }}" class="btn btn-warning">Cancel</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
-
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-warning">cancel</button>
     </form>
-
 </x-app>

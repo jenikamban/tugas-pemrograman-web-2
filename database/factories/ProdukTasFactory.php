@@ -2,23 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\produk-tas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<produk-tas>
- */
 class ProdukTasFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'nama_produk' => $this->faker->words(3, true),
+            'brand_tas_id' => 1,
+            'harga' => $this->faker->numberBetween(100000, 1000000),
+            'warna' => $this->faker->randomElement(['Hitam', 'Coklat', 'Biru', 'Putih', 'Abu-abu']),
+            'stok' => $this->faker->numberBetween(5, 50),
         ];
     }
 }

@@ -2,122 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tas;
+use App\Models\ProdukTas;
 use Illuminate\Http\Request;
 
 class TasController extends Controller
 {
-    
-
-     public function index(Request $request)
+    public function index()
     {
-        
-       $search = $request->input('search');
+        $tas = ProdukTas::paginate(5);
 
-    // Query dengan kondisi pencarian + pagination
-    $tas = Tas::query()
-        ->when($search, function ($query, $search) {
-            $query->where(function ($q) use ($search) {
-                $q->where('nama', 'like', "%{$search}%")
-                  ->orWhere('warna', 'like', "%{$search}%")
-                  ->orWhere('merk', 'like', "%{$search}%");
-            });
-        })
-        ->paginate(5)
-        ->withQueryString(); // supaya pagination tetap bawa parameter search
-
-    // Return ke view dengan data
-    return view('produk-tas.index', [
-        'title'  => 'Data Produk Tas',
-        'tas'    => $tas,
-        'search' => $search,
-    ]);
+        return view('produk-tas.index', [
+            'title' => 'Data Produk Tas',
+            'tas' => $tas,
+        ]);
     }
-
 
     public function create()
     {
         return view('produk-tas.create', [
-            'title' => 'Create Produk Tas',
+            'title' => 'Tambah Produk Tas',
         ]);
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nama' => 'required|max:255',
-            'merk' => 'required|max:255',
-            'harga' => 'required|numeric|min:5000000',
-            'warna' => 'required|max:255',
-            'jumlah' => 'required|integer|min:1|max:3',
-        ], [
-            'nama.required' => 'Nama wajib diisi',
-            'merk.required' => 'Merk wajib diisi',
-            'harga.required' => 'Harga wajib diisi',
-            'harga.numeric' => 'Harga harus berupa angka',
-            'harga.min' => 'Harga minimal Rp 5.000.000',
-            'warna.required' => 'Warna wajib diisi',
-            'jumlah.required' => 'jumlah wajib diisi',
-            'jumlah.integer' => 'jumlah harus bilangan bulat',
-            'jumlah.min' => 'jumlah minimal 1',
-            'jumlah.max' => 'jumlah max 3',
+        $request->validate([
+            'nama_produk' => 'required',
+            'harga' => 'required|numeric',
+            'warna' => 'required',
+            'stok' => 'required|numeric',
         ]);
 
-        Tas::create($validated);
+        ProdukTas::create($request->all());
 
-        return redirect()->route('tas.index')
-            ->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('produk-tas.index')
+                         ->with('success', 'Produk tas berhasil ditambahkan');
     }
 
-    public function show(Tas $tas)
+    public function edit(ProdukTas $tas)
     {
-        //
-    }
-
-    public function edit(Tas $tas)
-    {
-         return view('produk-tas.edit', [
-            'title' => ' edit produk',
+        return view('produk-tas.edit', [
+            'title' => 'Edit Produk Tas',
             'tas' => $tas,
         ]);
     }
 
-    public function update(Request $request, Tas $tas)
+    public function update(Request $request, ProdukTas $tas)
     {
-        $validated = $request->validate([
-            'nama' => 'required|max:255',
-            'merk' => 'required|max:255',
-            'harga' => 'required|numeric|min:5000000',
-            'warna' => 'required|max:255',
-            'jumlah' => 'required|integer|min:1|max:3',
-        ], [
-            'nama.required' => 'Nama wajib diisi',
-            'merk.required' => 'Merk wajib diisi',
-            'harga.required' => 'Harga wajib diisi',
-            'harga.numeric' => 'Harga harus berupa angka',
-            'harga.min' => 'Harga minimal Rp 5.000.000',
-            'warna.required' => 'Warna wajib diisi',
-            'jumlah.required' => 'jumlah wajib diisi',
-            'jumlah.integer' => 'jumlah harus bilangan bulat',
-            'jumlah.min' => 'jumlah minimal 1',
-            'jumlah.max' => 'jumlah max 3',
+        $request->validate([
+            'nama_produk' => 'required',
+            'harga' => 'required|numeric',
+            'warna' => 'required',
+            'stok' => 'required|numeric',
         ]);
 
-       $tas->update($validated);
+        $tas->update($request->all());
 
-        return redirect()->route('tas.index')
-            ->with('success', 'Data berhasil diubah');
+        return redirect()->route('produk-tas.index')
+                         ->with('success', 'Produk tas berhasil diperbarui');
     }
 
-    public function destroy(Tas $tas)
+    public function destroy(ProdukTas $tas)
     {
-        $tas->delete($tas);
+        $tas->delete();
 
-        return redirect()->route('tas.index')
-            ->with('success', 'Data berhasil dihapus');
-          }
-          
+        return redirect()->route('produk-tas.index')
+                         ->with('success', 'Produk tas berhasil dihapus');
     }
-        
-
-
+}
