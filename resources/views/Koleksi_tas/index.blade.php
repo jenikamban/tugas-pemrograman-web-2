@@ -1,7 +1,10 @@
 <x-app>
     <x-slot:title>Daftar Koleksi Tas</x-slot>
 
-    <!-- Tombol menuju halaman create -->
+    @session('success')
+        <div class="alert alert-success">{{ $value }}</div>
+    @endsession
+
     <a href="{{ route('koleksi-tas.create') }}" class="btn btn-primary mb-3">Create</a>
 
     <form action="{{ route('koleksi-tas.index') }}" method="GET" class="row g-3 mb-3">
@@ -36,8 +39,9 @@
                     <strong>[Brand: {{ $koleksi->brand->nama_brand ?? 'Tidak ada brand' }}]</strong>
                 </span>
                 <span class="d-flex gap-2">
-                    <!-- Commit 9 nanti: tombol edit & delete -->
-                </span>
+                    <a href="{{ route('koleksi-tas.edit', ['koleksi_ta' => $koleksi]) }}"
+                        class="btn btn-warning btn-sm">Edit</a>
+
             </li>
         @endforeach
     </ul>

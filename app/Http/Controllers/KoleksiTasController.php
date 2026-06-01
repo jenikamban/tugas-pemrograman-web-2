@@ -62,18 +62,33 @@ class KoleksiTasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KoleksiTas $koleksiTas)
-    {
-        //
-    }
+    public function edit(KoleksiTas $koleksi_ta)
+{
+    $brands = BrandTas::all();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, KoleksiTas $koleksiTas)
-    {
-        //
-    }
+    return view('koleksi_tas.edit', [
+        'koleksi' => $koleksi_ta,
+        'brands' => $brands
+    ]);
+}
+
+public function update(Request $request, KoleksiTas $koleksi_ta)
+{
+    $request->validate([
+        'nama_koleksi' => 'required|string|max:100',
+        'jenis_koleksi' => 'required|string|max:50',
+        'material' => 'required|string|max:50',
+        'warna' => 'required|string|max:50',
+        'brand_tas_id' => 'required|exists:brand_tas,id',
+    ]);
+
+    $koleksi_ta->update($request->all());
+
+    return redirect()->route('koleksi-tas.index')
+                     ->with('success', ' Data Koleksi berhasil diubah');
+}
+
+
 
     /**
      * Remove the specified resource from storage.
