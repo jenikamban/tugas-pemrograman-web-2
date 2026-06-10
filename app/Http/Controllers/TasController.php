@@ -53,7 +53,27 @@ class TasController extends Controller
 }
 public function update(Request $request, ProdukTas $tas)
 {
-    
+    $request->validate([
+        'nama_produk'  => 'required|max:255',
+        'brand_tas_id' => 'required|numeric',
+        'harga'        => 'required|numeric',
+        'warna'        => 'required',
+        'stok'         => 'required|numeric',
+        'deskripsi'    => 'nullable|string',
+    ]);
+
+    DB::beginTransaction();
+    try {
+        $tas->update($request->only([
+            'nama_produk','brand_tas_id','harga','warna','stok','deskripsi'
+        ]));
+        DB::commit();
+        return redirect()->route('produk-tas.index')
+                         ->with('success','Produk tas berhasil diperbarui');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return back()->with('error','Gagal memperbarui data: '.$e->getMessage());
+    }
 }
 
 public function destroy(ProdukTas $tas)
