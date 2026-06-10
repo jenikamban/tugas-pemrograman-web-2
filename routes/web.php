@@ -17,8 +17,10 @@ Route::delete('/produk-tas/{tas}', [TasController::class, 'destroy'])->name('pro
 
 // softdeletes
 Route::get('/produk-tas/trash', [TasController::class, 'trash'])->name('produk-tas.trash');
-Route::put('/produk-tas/{tas}/restore', [TasController::class, 'restore'])->name('produk-tas.restore');
-Route::delete('/produk-tas/{tas}/force-delete', [TasController::class, 'forceDelete'])->name('produk-tas.forceDelete');
+Route::put('/produk-tas/{tas}/restore', [TasController::class, 'restore'])->name('produk-tas.restore')->withTrashed();
+
+Route::delete('/produk-tas/{tas}/force-delete', [TasController::class, 'forceDelete']) ->name('produk-tas.forceDelete') ->withTrashed();
+
 
 // Resource untuk brand dan koleksi tas
 Route::resource('brand-tas', BrandTasController::class);

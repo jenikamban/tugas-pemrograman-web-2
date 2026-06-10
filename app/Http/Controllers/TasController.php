@@ -84,6 +84,31 @@ public function destroy(ProdukTas $tas)
                      ->with('success', 'Produk tas berhasil dihapus');
 }
 
+//softdelete
+public function trash()
+{
+    return view('produk-tas.trash', [
+        'title' => 'Trash Produk Tas',
+        'tas'   => ProdukTas::onlyTrashed()->latest()->get(),
+    ]);
+}
+
+public function restore(ProdukTas $tas)
+{
+    $tas = ProdukTas::onlyTrashed()->where('id', $tas->id)->firstOrFail();
+    $tas->restore();
+
+    return to_route('produk-tas.trash')->withSuccess('Produk tas berhasil dikembalikan');
+}
+
+public function forceDelete(ProdukTas $tas)
+{
+    $tas = ProdukTas::onlyTrashed()->where('id', $tas->id)->firstOrFail();
+    $tas->forceDelete();
+
+    return to_route('produk-tas.trash')->withSuccess('Produk tas berhasil dihapus permanen');
+}
+
 
 
 }

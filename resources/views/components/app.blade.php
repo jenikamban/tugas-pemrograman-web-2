@@ -24,6 +24,7 @@
                     <a class="nav-link active" href="{{ route('produk-tas.index') }}">PRODUK TAS</a>
                     <a class="nav-link active" href="{{ route('brand-tas.index') }}">BRAND TAS</a>
                     <a class="nav-link active" href="{{ route('koleksi-tas.index') }}">KOLEKSI TAS</a>
+                    <a class="nav-link active" href="{{ route('produk-tas.trash') }}">TRASH</a>
 
 
 
