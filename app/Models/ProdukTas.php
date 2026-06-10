@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['nama_produk','brand_tas_id','harga','warna','stok'])]
+#[Fillable(['nama_produk','brand_tas_id','harga','warna','stok','deskripsi'])]
 class ProdukTas extends Model
 {
     use HasFactory,SoftDeletes;
