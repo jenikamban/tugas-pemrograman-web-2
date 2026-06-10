@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BrandTas;
 use App\Models\ProdukTas;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,8 @@ class TasController extends Controller
 {
     public function index()
     {
-        $tas = ProdukTas::paginate(5);
+        // ambil semua data tanpa pagination
+        $tas = ProdukTas::all();
 
         return view('produk-tas.index', [
             'title' => 'Data Produk Tas',
@@ -40,33 +42,38 @@ class TasController extends Controller
     }
 
     public function edit(ProdukTas $tas)
-    {
-        return view('produk-tas.edit', [
-            'title' => 'Edit Produk Tas',
-            'tas' => $tas,
-        ]);
-    }
+{
+    $brands = BrandTas::all();
+    return view('produk-tas.edit', [
+        'title' => 'Edit Produk Tas',
+        'tas' => $tas,
+        'brands' => $brands,
+    ]);
+}
+public function update(Request $request, ProdukTas $tas)
+{
+    $request->validate([
+        'nama_produk' => 'required',
+        'brand_tas_id' => 'required|numeric',
+        'harga' => 'required|numeric',
+        'warna' => 'required',
+        'stok' => 'required|numeric',
+    ]);
 
-    public function update(Request $request, ProdukTas $tas)
-    {
-        $request->validate([
-            'nama_produk' => 'required',
-            'harga' => 'required|numeric',
-            'warna' => 'required',
-            'stok' => 'required|numeric',
-        ]);
+    $tas->update($request->all());
 
-        $tas->update($request->all());
+    return redirect()->route('produk-tas.index')
+                     ->with('success', 'Produk tas berhasil diperbarui');
+}
 
-        return redirect()->route('produk-tas.index')
-                         ->with('success', 'Produk tas berhasil diperbarui');
-    }
+public function destroy(ProdukTas $tas)
+{
+    $tas->delete();
 
-    public function destroy(ProdukTas $tas)
-    {
-        $tas->delete();
+    return redirect()->route('produk-tas.index')
+                     ->with('success', 'Produk tas berhasil dihapus');
+}
 
-        return redirect()->route('produk-tas.index')
-                         ->with('success', 'Produk tas berhasil dihapus');
-    }
+
+
 }

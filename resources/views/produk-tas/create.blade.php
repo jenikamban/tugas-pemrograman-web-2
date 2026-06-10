@@ -5,19 +5,10 @@
         @csrf
 
         <div class="mb-3">
-            <label>NAMA</label>
-            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
-                value="{{ old('nama') }}">
-            @error('nama')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label>MERK</label>
-            <input type="text" name="merk" class="form-control @error('merk') is-invalid @enderror"
-                value="{{ old('merk') }}">
-            @error('merk')
+            <label>NAMA PRODUK</label>
+            <input type="text" name="nama_produk" class="form-control @error('nama_produk') is-invalid @enderror"
+                value="{{ old('nama_produk') }}">
+            @error('nama_produk')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
@@ -41,15 +32,15 @@
         </div>
 
         <div class="mb-3">
-            <label>JUMLAH</label>
-            <input type="number" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror"
-                value="{{ old('jumlah') }}">
-            @error('jumlah')
+            <label>STOK</label>
+            <input type="number" name="stok" class="form-control @error('stok') is-invalid @enderror"
+                value="{{ old('stok') }}">
+            @error('stok')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
 
-        <a href="{{ route('tas.index') }}" class="btn btn-warning">Cancel</a>
+        <a href="{{ route('produk-tas.index') }}" class="btn btn-warning">Cancel</a>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </x-app>

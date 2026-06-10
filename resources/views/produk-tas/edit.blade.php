@@ -1,7 +1,7 @@
 <x-app>
     <x-slot:title>{{ $title }}</x-slot>
 
-    <form action="{{ route('brand-tas.update', $brand) }}" method="POST">
+    <form action="{{ route('produk-tas.update', $tas) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -10,6 +10,20 @@
             <input type="text" name="nama_produk" class="form-control @error('nama_produk') is-invalid @enderror"
                 value="{{ old('nama_produk', $tas->nama_produk) }}">
             @error('nama_produk')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label>BRAND</label>
+            <select name="brand_tas_id" class="form-control @error('brand_tas_id') is-invalid @enderror">
+                @foreach ($brands as $brand)
+                    <option value="{{ $brand->id }}" {{ $tas->brand_tas_id == $brand->id ? 'selected' : '' }}>
+                        {{ $brand->nama_brand }}
+                    </option>
+                @endforeach
+            </select>
+            @error('brand_tas_id')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
@@ -42,6 +56,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
-        <button type="submit" class="btn btn-warning">cancel</button>
+        <a href="{{ route('produk-tas.index') }}" class="btn btn-warning">Cancel</a>
     </form>
 </x-app>

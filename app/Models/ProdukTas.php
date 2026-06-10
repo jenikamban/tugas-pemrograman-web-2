@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable(['nama_produk','brand_tas_id','harga','warna','stok'])]
 class ProdukTas extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     // Relasi ke BrandTas
     public function brand()

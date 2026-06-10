@@ -14,16 +14,16 @@
         @foreach ($tas as $item)
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span>
-                    {{ $tas->firstItem() + $loop->index }}.
+                    {{ $loop->iteration }}.
                     {{ $item->nama_produk }} --
                     Rp {{ number_format($item->harga, 0, ',', '.') }} --
                     {{ $item->warna }} --
                     Stok: {{ $item->stok }}
                 </span>
                 <span class="d-flex gap-2">
-                    <a href="{{ route('produk-tas.edit', $item) }}" class="btn btn-warning btn-sm">edit</a>
+                    <a href="{{ route('produk-tas.edit', $item) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('produk-tas.destroy', $item) }}" method="POST"
-                        onsubmit="return confirm('ANDA YAKIN INGIN MENHAPUS PRODUK INI?');">
+                        onsubmit="return confirm('ANDA YAKIN INGIN MENGHAPUS PRODUK INI?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -32,9 +32,5 @@
             </li>
         @endforeach
     </ul>
-
-    <div class="mt-3">
-        {{ $tas->links() }}
-    </div>
 
 </x-app>
