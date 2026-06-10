@@ -14,7 +14,8 @@ Route::post('/produk-tas', [TasController::class, 'store'])->name('produk-tas.st
 Route::get('/produk-tas/{tas}/edit', [TasController::class, 'edit'])->name('produk-tas.edit');
 Route::put('/produk-tas/{tas}', [TasController::class, 'update'])->name('produk-tas.update');
 Route::delete('/produk-tas/{tas}', [TasController::class, 'destroy'])->name('produk-tas.destroy');
-
+//softdeletes
+Route::get('/produk-tas/trash', [TasController::class, 'trash'])->name('produk-tas.trash');
 // Resource untuk brand dan koleksi tas
 Route::resource('brand-tas', BrandTasController::class);
 Route::resource('koleksi-tas', KoleksiTasController::class);
