@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TasController;
 use App\Http\Controllers\BrandTasController;
 use App\Http\Controllers\KoleksiTasController;
+use App\Http\Controllers\TasController;
+use Illuminate\Support\Facades\Route;
 
 // Halaman utama menampilkan daftar produk tas
 Route::get('/', [TasController::class, 'index'])->name('produk-tas.index');
@@ -14,8 +14,12 @@ Route::post('/produk-tas', [TasController::class, 'store'])->name('produk-tas.st
 Route::get('/produk-tas/{tas}/edit', [TasController::class, 'edit'])->name('produk-tas.edit');
 Route::put('/produk-tas/{tas}', [TasController::class, 'update'])->name('produk-tas.update');
 Route::delete('/produk-tas/{tas}', [TasController::class, 'destroy'])->name('produk-tas.destroy');
-//softdeletes
+
+// softdeletes
 Route::get('/produk-tas/trash', [TasController::class, 'trash'])->name('produk-tas.trash');
+Route::put('/produk-tas/{tas}/restore', [TasController::class, 'restore'])->name('produk-tas.restore');
+Route::delete('/produk-tas/{tas}/force-delete', [TasController::class, 'forceDelete'])->name('produk-tas.forceDelete');
+
 // Resource untuk brand dan koleksi tas
 Route::resource('brand-tas', BrandTasController::class);
 Route::resource('koleksi-tas', KoleksiTasController::class);

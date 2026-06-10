@@ -53,18 +53,7 @@ class TasController extends Controller
 }
 public function update(Request $request, ProdukTas $tas)
 {
-    $request->validate([
-        'nama_produk' => 'required',
-        'brand_tas_id' => 'required|numeric',
-        'harga' => 'required|numeric',
-        'warna' => 'required',
-        'stok' => 'required|numeric',
-    ]);
-
-    $tas->update($request->all());
-
-    return redirect()->route('produk-tas.index')
-                     ->with('success', 'Produk tas berhasil diperbarui');
+    
 }
 
 public function destroy(ProdukTas $tas)
@@ -75,14 +64,6 @@ public function destroy(ProdukTas $tas)
                      ->with('success', 'Produk tas berhasil dihapus');
 }
 
-//soft deletes
-
-
-    public function trash()
-    {
-        $tas = ProdukTas::onlyTrashed()->get();
-        return view('produk-tas.trash', compact('tas'));
-    }
 
 
 }
