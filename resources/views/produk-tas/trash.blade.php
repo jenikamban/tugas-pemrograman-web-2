@@ -20,12 +20,6 @@
                         onclick="return confirm('Yakin ingin mengembalikan data ini?')">Restore</button>
                 </form>
 
-                <form action="{{ route('produk-tas.forceDelete', $item) }}" method="POST" class="d-inline">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" class="btn btn-danger btn-sm"
-                        onclick="return confirm('Yakin ingin menghapus permanen?')">Force Delete</button>
-                </form>
             </li>
         @endforeach
     </ul>
